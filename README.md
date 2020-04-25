@@ -1,16 +1,5 @@
-# zero
+# Zero
 
-A new Flutter project.
+App developed as a part of #hackcovy the first online hackathon with the goal of creating technological solutions to cope with problems caused by COVID-19 in Vietnam.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Our app gives clear instructions about recycling process, from identifying each material to guiding how to clean them properly, as well as allowing you to self-deliver or order a pick-up of your recyclable waste to nearby organizations .
