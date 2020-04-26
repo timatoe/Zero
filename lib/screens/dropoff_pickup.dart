@@ -5,6 +5,7 @@ import 'package:zero/data/collector.dart';
 import 'package:zero/data/collector_model.dart';
 import 'package:zero/data/recycling_center.dart';
 import 'package:zero/data/recycling_center_model.dart';
+import 'package:zero/screens/confirmation.dart';
 
 class DropOffPickUpScreen extends StatefulWidget {
   @override
@@ -24,7 +25,62 @@ class _DropOffPickUpScreen extends State<DropOffPickUpScreen> {
   bool displayDropOffView = true;
   
   Widget _buildDropOffView(List<RecyclingCenter> recyclingCenters) {
-    return Text('drop off');
+    return Column(
+      children: <Widget>[
+        Text(
+          'Enter Your Preferred Time and Place',
+          style: TextStyle(
+            color: Color(0xff36622B),
+            fontWeight: FontWeight.bold
+          ),
+        ),
+        SizedBox(height: 24,),
+        Expanded(
+          child: ListView.builder(
+            itemCount: recyclingCenters.length,
+            itemBuilder: (context, i) {
+              return Card(
+                shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                color: Color(0xffEFEFEF),
+                child: 
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Column(
+                    children: <Widget>[
+                      Text(recyclingCenters[i].name),
+                      Text(recyclingCenters[i].address),
+                      // Expanded(
+                      //   child: ListView.builder(
+                      //     scrollDirection: Axis.horizontal,
+                      //     itemCount: recyclingCenters[i].materials.length,
+                      //     itemBuilder: (context, j) {
+                      //       return Text(recyclingCenters[i].materials[j]);
+                      //       // return Chip(
+                      //       //   label: Text(
+                      //       //   recyclingCenters[i].materials[j], 
+                      //       //   style: new TextStyle(color: Color(0xff36622B)),
+                      //       // ),
+                      //       // backgroundColor: Colors.transparent,
+                      //       // shape: RoundedRectangleBorder(
+                      //       //   side: BorderSide(
+                      //       //     color: Color(0xff36622B)), 
+                      //       //     borderRadius: BorderRadius.all(Radius.circular(8)),
+                      //       // ),
+                      //       // );
+                      //     },
+                      //   ),
+                      // )
+                    ],
+                  ),
+                )
+              );
+            },
+          )
+        )
+      ],
+    );
   }
 
   Widget _buildPickUpView(List<Collector> collectors) {
@@ -144,33 +200,40 @@ class _DropOffPickUpScreen extends State<DropOffPickUpScreen> {
             fontWeight: FontWeight.bold
           ),
         ),
-        // ListView.builder(
-        //   scrollDirection: Axis.horizontal,
-        //   itemCount: collectors.length,
-        //   itemBuilder: (context, i) {
-        //     return Card(
-        //       shape: RoundedRectangleBorder(
-        //         borderRadius: BorderRadius.circular(15.0),
-        //       ),
-        //       color: Color(0xffEFEFEF),
-        //       child: Row(
-        //         children: <Widget>[
-                  
-        //         ],
-        //       ),
-        //     );
-        //   },
-        // ),
+        SizedBox(height: 24,),
+        Expanded(
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: collectors.length,
+            itemBuilder: (context, i) {
+              return Card(
+                shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                color: Color(0xffEFEFEF),
+                child: 
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Container(
+                    width: 300,
+                    child: Text(collectors[i].name),
+                  )
+                ),
+              );
+            },
+          ),
+        ),
+        SizedBox(height: 24,),
         RaisedButton(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
           color: Color(0xff36622B),
           onPressed: () {
-            // Navigator.of(context).push<void>(MaterialPageRoute(
-            //   builder: (context) => DropOffPickUpScreen(),
-            //   fullscreenDialog: false,
-            // ));   
+            Navigator.of(context).push<void>(MaterialPageRoute(
+              builder: (context) => ConfirmationScreen(),
+              fullscreenDialog: false,
+            ));   
           },
           child: const Text(
             'Book a time',
@@ -179,6 +242,7 @@ class _DropOffPickUpScreen extends State<DropOffPickUpScreen> {
             ),
           ),
         ),
+        SizedBox(height: 24,),
       ],
     );
   }
@@ -213,7 +277,9 @@ class _DropOffPickUpScreen extends State<DropOffPickUpScreen> {
               groupValue: segmentedControlValue,
               ),
           ), 
-          displayDropOffView ? _buildDropOffView(recyclingCenterModel.recyclingCenters) : _buildPickUpView(collectorModel.collectors),
+          Expanded(
+            child: displayDropOffView ? _buildDropOffView(recyclingCenterModel.recyclingCenters) : _buildPickUpView(collectorModel.collectors),
+          )
         ],
       ),
     );

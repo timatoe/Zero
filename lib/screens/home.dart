@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:zero/data/recycleable.dart';
 import 'package:zero/data/recycleable_model.dart';
+import 'package:zero/screens/directory.dart';
 import 'package:zero/screens/dropoff_pickup.dart';
 import 'package:zero/screens/instructions.dart';
 import 'package:zero/screens/rewards.dart';
@@ -209,7 +210,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: new TextStyle(
                                 color: Colors.white
                               ),
-                            )
+                            ),
+                            onTap: () {
+                              Navigator.of(context).push<void>(MaterialPageRoute(
+                                builder: (context) => DirectoryScreen(),
+                                fullscreenDialog: false,
+                              ));                     
+                            },
                           ),            
                           ListTile(
                             leading: Icon(
